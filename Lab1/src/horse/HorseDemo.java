@@ -58,16 +58,18 @@ public class HorseDemo {
         
         ArrayList<Horse> list = new ArrayList(Arrays.asList(array));
         
-        //descending order
+        //ascending order
         Collections.sort(list, new ComparingHorse());
         System.out.println(list.toString());
         
         //akipping line
         System.out.println();
         
-        //ascending order
+        //descending order
         Collections.reverse(list);
         System.out.println(list.toString());
-
+        
+        //alternative way of doing it:
+        //Collections.reverseOrder(new ComparingHorse());
     }  
 }

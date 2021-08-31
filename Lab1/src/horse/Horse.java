@@ -21,9 +21,6 @@
 
 package horse;
 
-import java.time.LocalDate;
-
-
 /**
  * A simple Horse class defining Horse objects.
  * @author Giuliana Bouzon
@@ -57,9 +54,7 @@ public class Horse implements Comparable <Horse> {
         
         return str;
     }
-    
-    
-    
+
     //getters and setters
 
     public String getName() {
