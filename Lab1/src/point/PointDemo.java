@@ -19,11 +19,12 @@
 * THE SOFTWARE.
 */
 
-package point;
+package lab1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.stream.Stream;
 
 /**
 * A simple application class to demonstrate Point and ComparePoint (Comparable/Comparator lab)
@@ -32,7 +33,6 @@ import java.util.Collections;
 public class PointDemo {
 
     public static void main(String[] args) {
-	// TODO Auto-generated method stub
 	
 	//creating Point array
 	Point[] pointArray = {new Point(2, 3), new Point(0, 0), new Point(12, 12), 
@@ -60,5 +60,9 @@ public class PointDemo {
 	System.out.println("Printing points list in ascending order of y-coordinate:");
 	Collections.sort(points, new ComparePoint());
 	System.out.println(points);
+	
+	//DOING IT WITH STREAMS and LAMBDA EXPRESSION
+	//advantage of doing it like this is that we don't need to create a separate Comparator class
+	Collections.sort(points, (Point o1, Point o2) -> (o1.getY() != o2.getY()) ? (o1.getY() - o2.getY()) : (o1.getX() - o2.getX()));
     }
 }
