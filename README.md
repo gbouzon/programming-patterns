@@ -15,7 +15,7 @@ Fall 2021. Repository for labs, assignments & projects in Programming Patterns c
     Project <b>ComparableComparator</b> contains ComparableComparatorDemo, CompareStudent and Student classes (demo on Comparable and Comparator interfaces done in lab class).
 </p>
 
-### 3. Lab 1:
+### 3. Lab1:
 
 <p> 
     Package <b>horse</b> contains exercises done in Lab 01 - Part 2, Q1 (ComparingHorse, Horse, HorseDemo, RaceHorse). <br>
@@ -32,7 +32,15 @@ Fall 2021. Repository for labs, assignments & projects in Programming Patterns c
     Package <b>student</b> contains classes created for Assignment1 - Part2 (Streams & Lambda Expressions), Q1 - Q4 (Student, StudentDemo). <br>
 </p>
 
-### 5. UsingStreams:
+### 5. ProgPatternsLab02:
+
+<p> 
+    Package <b>interfaces</b> contains interfaces created for Lab02 - Part1 (MyList). <br>
+    Package <b>mylinkedlist</b> contains classes created for Lab02 - Part1 (MyLinkedList, MyLinkedListDemo, Node). <br>
+    Package <b>student</b> contains classes created for Lab02 - Part2 (FullTimeStudent, PartTimeStudent, Student, StudentDemo). <br>
+</p>
+
+### 6. UsingStreams:
 
 <p> 
     Project <b>UsingStreams</b> contains UsingStreams classe (demo on streams & lambda expressions done in theory class).
