@@ -15,7 +15,7 @@ Exercises done in theory class.
     Project <b>ComparableComparator</b> contains ComparableComparatorDemo, CompareStudent and Student classes (demo on Comparable and Comparator interfaces).
 </p>
 
-### 6. Demo 03 - Streams:
+### 3. Demo 03 - Streams:
 
 <p> 
     Project <b>UsingStreams</b> contains UsingStreams classe (demo on streams & lambda expressions).
