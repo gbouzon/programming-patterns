@@ -22,6 +22,8 @@
 ### 2. Lab 03 - Iterator & Data Structures:
 
 <p> 
-    Package <b>Q1</b> contains classes created for Lab03 - Part1 LinkedList & Iterator, Q1, 1. (Player, GameList, GameDemo). <br>
-    Package <b>Q2</b> contains classes created for Lab02 - Part1, Q1, 2. (Sieve). <br>
+    Package <b>toplist</b> contains classes created for Lab03 - Q1, 1. LinkedList & Iterator (Player, GameList, GameDemo). <br>
+    Package <b>ancientalgorithms</b> contains classes created for Lab03 - Q1, 2. (Sieve). <br>
+    Package <b>patient</b> contains classes created for Lab03 - Q2. Priority Queue (ComparePatient, Patient, PatientDemo). <br>
+    Package <b>instructor</b> contains classes created for Lab03 - Q3. HashSet (Instructor, InstructorDemo). <br>
 </p>
