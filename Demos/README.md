@@ -24,7 +24,7 @@ Exercises done in theory class.
 ### 4. Demo 04 - Review & Map Interface:
 
 <p> 
-    Package <b>collectionreview</b> contains "fix the errors" exercises done in class (refer to map .ppt).
-    Package <b>company</b> contains "you do it" exercise from map .ppt (Client, CompanyDemo).
-    Package <b>map</b> contains exercises done with HashMaps, TreeMaps and LinkedHashMaps (refer to map .ppt).
+    Package <b>collectionreview</b> contains "fix the errors" exercises done in class (refer to map .ppt). <br>
+    Package <b>company</b> contains "you do it" exercise from map .ppt (Client, CompanyDemo). <br>
+    Package <b>map</b> contains exsercises done with HashMaps, TreeMaps and LinkedHashMaps (refer to map .ppt).
 </p>
