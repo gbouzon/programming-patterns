@@ -21,7 +21,7 @@ Exercises done in theory class.
     Project <b>UsingStreams</b> contains UsingStreams classe (demo on streams & lambda expressions).
 </p>
 
-### 3. Demo 04 - Review & Map Interface:
+### 4. Demo 04 - Review & Map Interface:
 
 <p> 
     Package <b>collectionreview</b> contains "fix the errors" exercises done in class (refer to map .ppt).
