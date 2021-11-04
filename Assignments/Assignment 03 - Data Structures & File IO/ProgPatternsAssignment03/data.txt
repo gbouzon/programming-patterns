@@ -1,0 +1,11 @@
+10
+Ben 3 Anna Sam Eddy
+Anna 1 Pierre
+Sam 3 Nasrine Alex Mary
+Eddy 0
+Pierre 2 Rita Miguel
+Nasrine 0
+Alex 0
+Mary 0
+Rita 0
+Miguel 0
