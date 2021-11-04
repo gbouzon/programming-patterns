@@ -25,7 +25,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -64,6 +63,36 @@ public class GenealogyData {
     }
     
     /**
+     * Tokenizes line and populates map accordingly.
+     * @param map, the input map.
+     * @param line, the line to be parsed
+     * @return the populated map.
+     */
+    private static Map<String, List<String>> parseLine(Map<String, List<String>> map, String line) {
+	//line will be: name number {name * number}
+	int descendantNb = 0;
+	String ancestor = "";
+	List<String> descendants = new ArrayList<>();
+	Scanner strScan = new Scanner(line);
+	
+	while (strScan.hasNext()) {
+	    ancestor = strScan.next().toLowerCase();
+	    
+	    if (strScan.hasNextInt()) {
+		descendantNb = strScan.nextInt();
+		
+		for (int i = 0; i < descendantNb; i++)
+		    descendants.add(strScan.next().toLowerCase());
+		
+		map.put(ancestor, descendants);
+	    }
+	}
+	
+	strScan.close();
+	return map;
+    }
+    
+    /**
      * Populates the linkedhashmap with the information in the file
      * @param map, the linkedhashmap to be populated
      * @return ^^
@@ -74,58 +103,38 @@ public class GenealogyData {
 	
 	//initializing variables
 	int nbLines = 0;
-	String ancestor = "";
-	List<String> descendants = new ArrayList<>();
 	Scanner input = new Scanner(new FileInputStream(file));
 	
 	//getting number of lines (aka size of map)
-	while(input.hasNextInt()) {
+	if (input.hasNextInt()) 
 	    nbLines = input.nextInt();
-	}
-	//testing
-	System.out.println(nbLines);
 	
+	for (int i = 0; i <= nbLines; i++) 
+	    map = parseLine(map, input.nextLine());
 	
+	input.close();
 	return map;
     }
-
-    public static void main(String[] args) {
-	
-	Map<String, List<String>> familyMap = new LinkedHashMap<>();
-	
-	//TESTINGGGGGGGGG
-	try {
-	    populateMap(familyMap);
-	} catch (FileNotFoundException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	}
-	
-	//deal with all this laters
-	//also: switch from linkedlist to arraylist pls and thank
-        familyMap.put("Ben", Arrays.asList(new String[]{"Anna", "Sam", "Eddy"}));
-        familyMap.put("Anna",Arrays.asList(new String[]{"Pierre"}));
-        familyMap.put("Sam", Arrays.asList(new String[]{"Nasrine", "Alex", "Mary"}));
-        familyMap.put("Eddy", new ArrayList<>());
-        familyMap.put("Pierre", Arrays.asList(new String[]{"Rita", "Miguel"}));
-        familyMap.put("Nasrine", new ArrayList<>());
-        familyMap.put("Alex", new ArrayList<>());
-        familyMap.put("Rita", new ArrayList<>());
-        familyMap.put("Miguel", new ArrayList<>());
-        
-        familyMap.forEach((k, v) -> System.out.println("Key:" + k + "  " + "      Number of Children : " + 
-        v.size() + "    " + "Children : " + v));
     
-        String descendant = retrieveName("descendant");
-        String descendantCopy = descendant;
-        String ancestor = retrieveName("ancestor");
-        String ancestorCopy = ancestor;
-        
-        LinkedList<String> names = new LinkedList<>();
+    /**
+     * Checks if descendant is really a descendant of ancestor
+     * @param familyMap, the input map object
+     * @param ancestor, the string value for the ancestor
+     * @param descendant, the string value for the descendant
+     */
+    public static void isDescendant(Map<String, List<String>> familyMap, String ancestor, String descendant) {
+	//case insensitivity
+	ancestor = ancestor.toLowerCase();
+	descendant = descendant.toLowerCase();
+	
+	String descendantCopy = descendant;
+	String ancestorCopy = ancestor;
+	LinkedList<String> names = new LinkedList<>();
         names.addLast(descendant);
+        
         if (familyMap.keySet().contains(descendant) || familyMap.keySet().contains(ancestor)) {
         // Keep turning
-            while (!names.contains(ancestor)){
+            while (!names.contains(ancestor)) {
                 for (Map.Entry<String, List<String>> entry : familyMap.entrySet()) {
                     if (entry.getValue().contains(descendant)) {
                         names.addFirst(entry.getKey());
@@ -139,16 +148,38 @@ public class GenealogyData {
                 }
             }
                    
-
             System.out.println(names);  
-            if (names.getLast().equals(descendantCopy) && names.getFirst().equals(ancestorCopy))
-                System.out.println("Yes " + descendantCopy + " is a descendant of " + ancestorCopy);
+            if (names.getLast().equalsIgnoreCase(descendantCopy) && names.getFirst().equalsIgnoreCase(ancestorCopy))
+                System.out.println(descendantCopy + " is a descendant of " + ancestorCopy);
             else 
-                System.out.println("No " + descendantCopy + " is not a descendant of " + ancestorCopy);
+                System.out.println(descendantCopy + " is not a descendant of " + ancestorCopy);
         }
         else {
-            System.out.println("Descendant" + descendant + "and" + "Ancestor" + ancestor + "not in this family");
+            System.out.println("Descendant \'" + descendantCopy + "\' and ancestor \'" + ancestorCopy + "\' are not in this family.");
             return;
-        }
+        } 
+    }
+
+    public static void main(String[] args) {
+	//converted all names to lowercase to apply case insensitivity
+	//output however is not title case - check that later
+
+	//creating map
+	Map<String, List<String>> familyMap = new LinkedHashMap<>();
+	
+	//populating map with info from file
+	try {
+	    populateMap(familyMap);
+	} catch (FileNotFoundException e) {
+	    e.printStackTrace();
+	}
+	
+	//getting user input for descendant and ancestor
+        String descendant = retrieveName("descendant");
+        String ancestor = retrieveName("ancestor");
+        
+        isDescendant(familyMap, ancestor, descendant);   
+        
+        console.close();
     }
 }
