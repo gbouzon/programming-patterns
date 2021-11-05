@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
-*
+* Application class to test Assignment 03, Q1
 * @author Chilka Castro & Giuliana Bouzon
 */
 public class ClientDemo {

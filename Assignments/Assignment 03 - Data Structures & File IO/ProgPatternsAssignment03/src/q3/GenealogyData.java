@@ -124,59 +124,76 @@ public class GenealogyData {
      * @param descendant, the string value for the descendant
      */
     public static void isDescendant(Map<String, List<String>> familyMap, String ancestor, String descendant) {
-		//case insensitivity
-		ancestor = ancestor.toLowerCase();
-		descendant = descendant.toLowerCase();
-		
-		String descendantCopy = descendant;
-		String ancestorCopy = ancestor;
-		LinkedList<String> names = new LinkedList<>();
-        names.addLast(descendant);
-        
-        if (familyMap.keySet().contains(descendant) || familyMap.keySet().contains(ancestor)) {
-        // Keep turning
-            while (!names.contains(ancestor)) {
-                for (Map.Entry<String, List<String>> entry : familyMap.entrySet()) {
-                    if (entry.getValue().contains(descendant)) {
-                        names.addFirst(entry.getKey());
-                        descendant = entry.getKey();   // change descendant to new Key
+    	// for case insensitivity purposes
+    	ancestor = ancestor.toLowerCase();
+    	descendant = descendant.toLowerCase();
+    		
+    	String descendantCopy = descendant;
+    	String ancestorCopy = ancestor;
+    	LinkedList<String> names = new LinkedList<>();
+            names.addLast(descendant);
+           
+            if (familyMap.keySet().contains(descendant) && !familyMap.keySet().contains(ancestor)) {
+                System.out.println("Ancestor \'" + ancestorCopy + "\' is not in this family");
+                System.exit(0);
+            }
+            
+            else if (familyMap.keySet().contains(ancestor) && !familyMap.keySet().contains(descendant)) {
+                System.out.println("Descendant \'" + descendantCopy + "\' is not in this family");
+                System.exit(0);
+            }
+            
+            if (familyMap.keySet().contains(descendant)) {
+            // Keep turning
+                while (!names.contains(ancestor)) {
+            	
+                    for (Map.Entry<String, List<String>> entry : familyMap.entrySet()) {
+                        if (entry.getValue().contains(descendant)) {
+                            names.addFirst(entry.getKey());
+                            descendant = entry.getKey();   // change descendant to new Key
+                        }
                     }
-                }
+                    try {
+                        if (familyMap.get(ancestor).isEmpty()) {
+                        	names.clear();
+                        	System.out.println("\'" + descendantCopy.substring(0, 1).toUpperCase() + 
+    	                    descendantCopy.substring(1) + "\' is not a descendant of \'" + 
+    	                        ancestorCopy.substring(0, 1).toUpperCase() + ancestorCopy.substring(1) + "\'");
+    	                break;
+                        }
+                        if (names.size() == 1 && !names.contains(ancestor)) {
+                        	System.exit(0);
+                        }
+                    }
+                    catch (Exception e) {
+                        names.clear();
+                        break;
+                    }
+                }      
                 try {
-	                if (familyMap.get(ancestor).isEmpty()) {
-	                	names.clear();
-	                    System.out.println("No " + descendantCopy.substring(0, 1).toUpperCase() + 
-	                    		descendantCopy.substring(1) + " is not a descendant of " + 
-	                    		ancestorCopy.substring(0, 1).toUpperCase() + ancestorCopy.substring(1));
-	                    break;
-	                }
+                	
+                	names.subList(0, names.size() - 1).forEach(e -> System.out.print(e + " ----> "));
+                    System.out.println(names.getLast());
+                    
+                    if (names.getLast().equalsIgnoreCase(descendantCopy) && names.getFirst().equalsIgnoreCase(ancestorCopy)) 
+                        System.out.println(descendantCopy.substring(0, 1).toUpperCase() + 
+                            descendantCopy.substring(1) + " is a descendant of " + ancestorCopy.substring(0,
+                    	    1).toUpperCase() + ancestorCopy.substring(1));
+                    
                 }
                 catch (Exception e) {
-                	names.clear();
-                	break;
+            	System.exit(0);
                 }
-            }      
-            try {
-            	names.subList(0, names.size() - 1).forEach(e -> System.out.print(e + " ----> "));
-                System.out.println(names.getLast());
-                
-                if (names.getLast().equalsIgnoreCase(descendantCopy) && names.getFirst().equalsIgnoreCase(ancestorCopy)) 
-                    System.out.println(descendantCopy.substring(0, 1).toUpperCase() + 
-                    		descendantCopy.substring(1) + " is a descendant of " + ancestorCopy.substring(0,
-            				1).toUpperCase() + ancestorCopy.substring(1));
             }
-            catch (Exception e) {
-                System.out.println("Please put correct input");
-            }
+            
+            else {
+                System.out.println("Descendant \'" + descendantCopy.substring(0, 1).toUpperCase() + 
+                    descendantCopy.substring(1) + "\' and ancestor \'" + ancestorCopy.substring(0,
+        		    1).toUpperCase() + ancestorCopy.substring(1) + "\' are not in this family.");
+                return;
+            } 
         }
-        
-        else {
-            System.out.println("Descendant \'" + descendantCopy.substring(0, 1).toUpperCase() + 
-            		descendantCopy.substring(1) + "\' and ancestor \'" + ancestorCopy.substring(0,
-    				1).toUpperCase() + ancestorCopy.substring(1) + "\' are not in this family.");
-            return;
-        } 
-    }
+    
 
     public static void main(String[] args) {
     	//converted all names to lowercase to apply case insensitivity

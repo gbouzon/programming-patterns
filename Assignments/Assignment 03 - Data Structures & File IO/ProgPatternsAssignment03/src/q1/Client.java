@@ -22,7 +22,7 @@
 package q1;
 
 /**
-*
+* Class defines Client objects.
 * @author Chilka Castro & Giuliana Bouzon
 */
 public class Client {

@@ -24,7 +24,7 @@ package q1;
 import java.util.Objects;
 
 /**
-*
+* Class defines Contact objects.
 * @author Chilka Castro & Giuliana Bouzon
 */
 class Contact implements Comparable<Contact> {

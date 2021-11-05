@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
-*
+* Application class for Assignment 01, Q2.
 * @author Giuliana Bouzon
 */
 public class OccurrenceCountDemo {
@@ -58,7 +58,6 @@ public class OccurrenceCountDemo {
                     if (entry.getKey().equals(num))
                         entry.setValue(entry.getValue() + 1);
             
-//           inputs.stream().filter(e -> numsMap.containsKey(e) ? numsMap.get(e) + 1 : numsMap.put(e, 1)).
         } while (num != 0);
 
         numsMap.forEach((k, v) -> System.out.println("Key : " + k + " Frequency: " + v));
