@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
 *
@@ -53,14 +54,14 @@ public class GenealogyData {
      * @return the entered String value.
      */
     public static String retrieveName(String type) {
-	String name = "";
-	do {
-	    System.out.print("Please enter " + type + " name: ");
-	    name = console.nextLine();
-	} while (!Pattern.matches(nameRegex, name));
-	
-	return name;
-    }
+		String name = "";
+		do {
+		    System.out.print("Please enter " + type + " name: ");
+		    name = console.nextLine();
+		} while (!Pattern.matches(nameRegex, name));
+		
+		return name;
+	    }
     
     /**
      * Tokenizes line and populates map accordingly.
@@ -69,27 +70,27 @@ public class GenealogyData {
      * @return the populated map.
      */
     private static Map<String, List<String>> parseLine(Map<String, List<String>> map, String line) {
-	//line will be: name number {name * number}
-	int descendantNb = 0;
-	String ancestor = "";
-	List<String> descendants = new ArrayList<>();
-	Scanner strScan = new Scanner(line);
-	
-	while (strScan.hasNext()) {
-	    ancestor = strScan.next().toLowerCase();
-	    
-	    if (strScan.hasNextInt()) {
-		descendantNb = strScan.nextInt();
+		//line will be: name number {name * number}
+		int descendantNb = 0;
+		String ancestor = "";
+		List<String> descendants = new ArrayList<>();
+		Scanner strScan = new Scanner(line);
 		
-		for (int i = 0; i < descendantNb; i++)
-		    descendants.add(strScan.next().toLowerCase());
+		while (strScan.hasNext()) {
+		    ancestor = strScan.next().toLowerCase();
+		    
+		    if (strScan.hasNextInt()) {
+			descendantNb = strScan.nextInt();
+			
+			for (int i = 0; i < descendantNb; i++)
+			    descendants.add(strScan.next().toLowerCase());
+			
+			map.put(ancestor, descendants);
+		    }
+		}
 		
-		map.put(ancestor, descendants);
-	    }
-	}
-	
-	strScan.close();
-	return map;
+		strScan.close();
+		return map;
     }
     
     /**
@@ -101,19 +102,19 @@ public class GenealogyData {
     public static Map<String, List<String>> populateMap(Map<String, List<String>> map) 
 	    throws FileNotFoundException {
 	
-	//initializing variables
-	int nbLines = 0;
-	Scanner input = new Scanner(new FileInputStream(file));
-	
-	//getting number of lines (aka size of map)
-	if (input.hasNextInt()) 
-	    nbLines = input.nextInt();
-	
-	for (int i = 0; i <= nbLines; i++) 
-	    map = parseLine(map, input.nextLine());
-	
-	input.close();
-	return map;
+		//initializing variables
+		int nbLines = 0;
+		Scanner input = new Scanner(new FileInputStream(file));
+		
+		//getting number of lines (aka size of map)
+		if (input.hasNextInt()) 
+		    nbLines = input.nextInt();
+		
+		for (int i = 0; i <= nbLines; i++) 
+		    map = parseLine(map, input.nextLine());
+		
+		input.close();
+		return map;
     }
     
     /**
@@ -123,13 +124,13 @@ public class GenealogyData {
      * @param descendant, the string value for the descendant
      */
     public static void isDescendant(Map<String, List<String>> familyMap, String ancestor, String descendant) {
-	//case insensitivity
-	ancestor = ancestor.toLowerCase();
-	descendant = descendant.toLowerCase();
-	
-	String descendantCopy = descendant;
-	String ancestorCopy = ancestor;
-	LinkedList<String> names = new LinkedList<>();
+		//case insensitivity
+		ancestor = ancestor.toLowerCase();
+		descendant = descendant.toLowerCase();
+		
+		String descendantCopy = descendant;
+		String ancestorCopy = ancestor;
+		LinkedList<String> names = new LinkedList<>();
         names.addLast(descendant);
         
         if (familyMap.keySet().contains(descendant) || familyMap.keySet().contains(ancestor)) {
@@ -141,40 +142,57 @@ public class GenealogyData {
                         descendant = entry.getKey();   // change descendant to new Key
                     }
                 }
-                
-                if (familyMap.get(ancestor).isEmpty()) {
-                    System.out.println("No " + descendantCopy + " is not a descendant of " + ancestorCopy);
-                    break;
+                try {
+	                if (familyMap.get(ancestor).isEmpty()) {
+	                	names.clear();
+	                    System.out.println("No " + descendantCopy.substring(0, 1).toUpperCase() + 
+	                    		descendantCopy.substring(1) + " is not a descendant of " + 
+	                    		ancestorCopy.substring(0, 1).toUpperCase() + ancestorCopy.substring(1));
+	                    break;
+	                }
                 }
+                catch (Exception e) {
+                	names.clear();
+                	break;
+                }
+            }      
+            try {
+            	names.subList(0, names.size() - 1).forEach(e -> System.out.print(e + " ----> "));
+                System.out.println(names.getLast());
+                
+                if (names.getLast().equalsIgnoreCase(descendantCopy) && names.getFirst().equalsIgnoreCase(ancestorCopy)) 
+                    System.out.println(descendantCopy.substring(0, 1).toUpperCase() + 
+                    		descendantCopy.substring(1) + " is a descendant of " + ancestorCopy.substring(0,
+            				1).toUpperCase() + ancestorCopy.substring(1));
             }
-                   
-            System.out.println(names);  
-            if (names.getLast().equalsIgnoreCase(descendantCopy) && names.getFirst().equalsIgnoreCase(ancestorCopy))
-                System.out.println(descendantCopy + " is a descendant of " + ancestorCopy);
-            else 
-                System.out.println(descendantCopy + " is not a descendant of " + ancestorCopy);
+            catch (Exception e) {
+                System.out.println("Please put correct input");
+            }
         }
+        
         else {
-            System.out.println("Descendant \'" + descendantCopy + "\' and ancestor \'" + ancestorCopy + "\' are not in this family.");
+            System.out.println("Descendant \'" + descendantCopy.substring(0, 1).toUpperCase() + 
+            		descendantCopy.substring(1) + "\' and ancestor \'" + ancestorCopy.substring(0,
+    				1).toUpperCase() + ancestorCopy.substring(1) + "\' are not in this family.");
             return;
         } 
     }
 
     public static void main(String[] args) {
-	//converted all names to lowercase to apply case insensitivity
-	//output however is not title case - check that later
+    	//converted all names to lowercase to apply case insensitivity
+    	//output however is not title case - check that later
 
-	//creating map
-	Map<String, List<String>> familyMap = new LinkedHashMap<>();
+    	//creating map
+    	Map<String, List<String>> familyMap = new LinkedHashMap<>();
 	
-	//populating map with info from file
-	try {
-	    populateMap(familyMap);
-	} catch (FileNotFoundException e) {
-	    e.printStackTrace();
-	}
+    	//populating map with info from file
+    	try {
+    		populateMap(familyMap);
+		} catch (FileNotFoundException e) {
+		    e.printStackTrace();
+		}
 	
-	//getting user input for descendant and ancestor
+    	//getting user input for descendant and ancestor
         String descendant = retrieveName("descendant");
         String ancestor = retrieveName("ancestor");
         
