@@ -19,7 +19,7 @@
     Package <b>student</b> contains classes created for Lab02 - Part2 (FullTimeStudent, PartTimeStudent, Student, StudentDemo). <br>
 </p>
 
-### 2. Lab 03 - Iterator & Data Structures:
+### 3. Lab 03 - Iterator & Data Structures:
 
 <p> 
     Package <b>toplist</b> contains classes created for Lab03 - Q1, 1. LinkedList & Iterator (Player, GameList, GameDemo). <br>
@@ -29,7 +29,7 @@
     Package <b>stock</b> contains classes created for Lab03 - Q4, part 1. HashMap (Data, Stock, StockDemo). <br>
 </p>
 
-### 2. Lab 04 - Design Patterns:
+### 4. Lab 04 - Design Patterns:
 
 <p> 
     Package <b>usehotelroom</b> contains classes created for Lab04 - A, 1. Simpleton (HotelRoom, Suite, UseHotelRoom). <br>
