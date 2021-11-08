@@ -26,4 +26,17 @@
     Package <b>ancientalgorithms</b> contains classes created for Lab03 - Q1, 2. (Sieve). <br>
     Package <b>patient</b> contains classes created for Lab03 - Q2. Priority Queue (ComparePatient, Patient, PatientDemo). <br>
     Package <b>instructor</b> contains classes created for Lab03 - Q3. HashSet (Instructor, InstructorDemo). <br>
+    Package <b>stock</b> contains classes created for Lab03 - Q4, part 1. HashMap (Data, Stock, StockDemo). <br>
+</p>
+
+### 2. Lab 04 - Design Patterns:
+
+<p> 
+    Package <b>usehotelroom</b> contains classes created for Lab04 - A, 1. Simpleton (HotelRoom, Suite, UseHotelRoom). <br>
+    Package <b>vehicle</b> contains classes created for Lab04 - A, 2. Simpleton & Factory (Car, FactoryVehicle, Motorcyle, TrackTrailer, UseVehicle, Vehicle). <br>
+    Package <b>horse</b> contains classes created for Lab04 - A, 3. Factory (ComparingHorse, FactoryHorse, Horse, HorseDemo, RaceHorse). <br>
+    Package <b>company</b> contains classes created for Lab04 - B, 1. Factory (Division, DivisionDemo, DivisionFactory, DomesticDivision, InternationalDivision). <br>
+    Package <b>geometricfigure</b> contains classes created for Lab04 - B, 2. Strategy & Factory (FigureFactory, GeometricFigure, GeometricFigureDemo, Rectangle, Square, Triangle). <br>
+    Package <b>bird</b> contains classes created for Lab04 - B, 3. Adapter (AdapterToyDuck, Bird, BirdDemo, PlasticToyDuck, Sparrow, ToyDuck). <br>
+    Package <b>car</b> contains classes created for Lab04 - B, 4. MVC (Car, CarController, CarDemo, CarDemoMVC, CarView). <br>
 </p>
